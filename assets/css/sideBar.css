@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+.open{
+    width: 250px !important;
+}
+.body{
+    background: #eaeaea;
+    font-family: "Segoe UI", sans-serif;
+}
+
+.bg_primary{
+    background: #d54b4b;
+}
+
+body{
+    font-family: "Segoe UI", sans-serif;
+}
+.sideLink .links:hover{
+    background-color: #efefef;
+    color: #2c2c2c;
+}
+.sideLink .links {
+    cursor: pointer;
+    font-weight: bold;
+    transition: ease-in-out 100ms;
+    color: #5b5b5b;
+    font-size: 0.8rem;
+    text-decoration: none;
+    border-left: #d54b4b;
+    font-family: "Segoe UI Semibold", sans-serif;
+}
+.iContainer{
+    width: 100%;
+    max-width: 65px;
+    text-align: center;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+.sideNav, .sidebar{
+    display: flex;
+    width: 70px;
+    height: 100vh;
+    transition: ease-in-out 500ms;
+}
+
+table.dataTable th, td {
+    font-size: .8em;
+}
+.overflow-ellipsis{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+div.dataTables_wrapper div.dataTables_filter input {
+    width: 150px;
+    height: 25px;
+}
