@@ -40,11 +40,7 @@ include '../main_libraries.php';
 <body>
 <div class="container d-flex justify-content-center py-5">
     <div class="w-75">
-        <?php
-        $back_location = 'st_main.php';
-        isset($_SESSION['walk_in']) && $_SESSION['walk_in'] === true && $back_location = '../admin/dashboard.php'
-        ?>
-        <a href="<?= $back_location ?>" class="btn btn-danger border-0 text-light mb-3 bg_primary" style="font-size: .8rem;">
+        <a href="st_main.php" class="btn btn-danger border-0 text-light mb-3 bg_primary" style="font-size: .8rem;">
             <i class="fa fa-arrow-alt-circle-left me-2"></i>Back to Portal
         </a>
         <div class="card shadow shadow-md px-3">

@@ -12,6 +12,26 @@ isset($_POST['date']) && $_SESSION['sched'] = $_POST['date'];
     .container{
         font-family: 'Poppins', sans-serif !important;
     }
+
+    .docCardIMG:hover {
+        height: 200px !important; /* set the desired increased height */
+    }
+
+    .docCardIMG {
+        transition: all 0.3s ease;
+        position: relative;
+        height: 150px; /* set the desired height of the container */
+        overflow: hidden;
+    }
+
+    .docCardIMG img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
 </style>
 
 <div class="container">
@@ -74,11 +94,15 @@ isset($_POST['date']) && $_SESSION['sched'] = $_POST['date'];
                                     <?php while ($row = mysqli_fetch_assoc($documents)) : ?>
                                         <div class="col">
                                             <div onclick="toggleCheckbox(<?= $row['DocumentID'] ?>)" style="cursor: pointer" class="card h-100" id="card<?= $row['DocumentID'] ?>">
-                                                <div class="position-relative">
+                                                <div class="position-relative border-bottom">
                                                     <?php if (!isset($row['PreviewImage']) || $row['PreviewImage'] === '') : ?>
-                                                        <img src="../../img/ID_cardDefault.jpg" class="card-img-top" id="cardImg" alt="<?= $row['DocumentDescription'] ?>">
+                                                        <div class="docCardIMG">
+                                                            <img src="/evsu_registrar/img/docx_default.png" class="card-img-top" id="cardImg" alt="<?= $row['DocumentName'] ?>">
+                                                        </div>
                                                     <?php else : ?>
-                                                        <img src="<?= $row['PreviewImage'] ?>" class="card-img-top" id="cardImg" alt="<?= $row['DocumentDescription'] ?>">
+                                                        <div class="docCardIMG">
+                                                            <img src="<?= $row['PreviewImage'] ?>" class="card-img-top" id="cardImg" alt="<?= $row['DocumentDescription'] ?>">
+                                                        </div>
                                                     <?php endif; ?>
                                                     <div class="position-absolute p-3 top-0 d-flex justify-content-between w-100">
                                                         <div class="form-check">
@@ -92,6 +116,7 @@ isset($_POST['date']) && $_SESSION['sched'] = $_POST['date'];
                                                     </div>
                                                 </div>
                                                 <div class="card-body h-100">
+                                                    <div class="fs-6 fw-bold mb-2"><?= $row['DocumentName'] ?></div>
                                                     <?php
                                                     $description = $row['DocumentDescription'];
                                                     $lines = explode("\n", $description); // Split the text into an array of lines
@@ -109,15 +134,18 @@ isset($_POST['date']) && $_SESSION['sched'] = $_POST['date'];
                                             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="documentModalLabel<?= $row['DocumentID'] ?>"><?= $row['DocumentDescription'] ?></h5>
+                                                        <h5 class="modal-title"><?= $row['DocumentName'] ?></h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <div class="modal-body">
+                                                    <div class="modal-body p-0">
                                                         <?php if (!isset($row['PreviewImage']) || $row['PreviewImage'] === '') : ?>
-                                                            <img src="../../img/ID_cardDefault.jpg" class="img-fluid" alt="<?= $row['DocumentDescription'] ?>">
+                                                            <img src="/evsu_registrar/img/docx_default.png" class="img-fluid" alt="<?= $row['DocumentDescription'] ?>">
                                                         <?php else : ?>
                                                             <img src="<?= $row['PreviewImage'] ?>" class="img-fluid" alt="<?= $row['DocumentDescription'] ?>">
                                                         <?php endif; ?>
+                                                    </div>
+                                                    <div class="modal-footer justify-content-start">
+                                                        <div><?= $row['DocumentDescription'] ?></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -128,7 +156,7 @@ isset($_POST['date']) && $_SESSION['sched'] = $_POST['date'];
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-white py-3">
-                        <a href="../../student/select_sched.php" class="btn btn-light">
+                        <a href="select_sched.php" class="btn btn-light">
                             <i class="fa-solid fa-chevron-left"></i> Back to Portal
                         </a>
                         <button type="submit" class="btn btn-outline-primary px-5">Submit</button>
@@ -175,7 +203,7 @@ isset($_POST['date']) && $_SESSION['sched'] = $_POST['date'];
                     };
                     reader.readAsDataURL(input.files[0]);
                 } else {
-                    $('#idPicturePreview').attr('src', '../../img/ID_cardDefault.jpg');
+                    $('#idPicturePreview').attr('src', '..//evsu_registrar/img/docx_default.png');
                 }
             });
 

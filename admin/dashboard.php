@@ -133,7 +133,7 @@ include '../toast.php';
                                             <div class="nav-link text-secondary" data-target="#for-release">For release <span class="badge bg-secondary-subtle rounded-1 align-top text-dark"><?= $for_release_count ?></span></div>
                                         </div>
                                     </div>
-                                    <form class="m-0 d-grid align-items-center" method="post" action="../student/select_sched.php">
+                                    <form class="m-0 d-grid align-items-center" method="post" action="PhpHandler/select_sched.php">
                                         <button class="btn btn-outline-danger btn-sm" name="walk_in"><i class="fa-solid fa-plus"></i> Add request</button>
                                     </form>
                                 </div>

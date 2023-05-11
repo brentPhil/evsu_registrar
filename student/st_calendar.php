@@ -144,12 +144,7 @@ $first_day_of_week = array_search(date('D', strtotime("$active_year-$active_mont
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body pb-0">
-                            <?php
-                            $sub_location = '';
-                            isset($_SESSION['walk_in']) && $_SESSION['walk_in'] === true
-                                ? $sub_location = '../admin/PhpHandler/walkIn_form.php'
-                                : $sub_location = 'RequestHandler/requestForm.php'; ?>
-                            <form action="<?= $sub_location ?>" method="post">
+                            <form action="RequestHandler/requestForm.php" method="post">
                                 <div class="mb-3">
                                     <label for="floatingInput">Selected date</label>
                                     <input type="hidden" name="date" class="form-control my-2" value="<?php echo $c_date ?>">

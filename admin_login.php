@@ -1,11 +1,25 @@
-<?php include '_libraries.php'?>
+<?php
+session_start();
+if (isset($_SESSION["admin_login"]) && $_SESSION['admin_login']) {
+    header("Location: /evsu_registrar/admin/dashboard.php");
+    exit();
+} else {
+    unset(
+        $_SESSION["admin_login"],
+        $_SESSION["id"],
+        $_SESSION["ad_name"],
+        $_SESSION["dept_id"]);
+}
+include 'main_libraries.php';
+include 'toast.php'
+?>
 
 <div class="container">
     <div class="row vh-100 align-items-center justify-content-center">
         <div class="col-12 col-md-8 col-lg-5">
             <div class="card shadow-lg border-0">
                 <div class="card-header bg_primary p-4 text-light text-center">
-                    <img src="img/logo.png" alt="" style="max-width: 130px;">
+                    <img src="/evsu_registrar/img/logo.png" alt="" style="max-width: 130px;">
                     <h3 class="mt-3 mb-0 font-weight-bold">ADMIN LOGIN</h3>
                     <h6 class="mb-0">OFFICE OF THE REGISTRAR EVSU-TC</h6>
                 </div>
@@ -16,7 +30,7 @@
                             <span><?php echo $_GET['error']; ?></span>
                         </div>
                     <?php } ?>
-                    <form action="db_conn/admin_login.php" method="POST">
+                    <form action="/evsu_registrar/db_conn/admin_login.php" method="POST">
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="floatingInput" name="username" placeholder="Username">
                             <label for="floatingInput"><i class="fa-solid fa-user me-3"></i>Username</label>

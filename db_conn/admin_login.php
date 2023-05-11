@@ -3,11 +3,13 @@ session_start();
 include 'config.php';
 
 if ( empty($_POST['username'])) {
-    header("Location: ../../admin_login.php?error=Pls enter username");
+    $_SESSION['error'] = 'Pls enter your username';
+    header("Location: /evsu_registrar/admin_login.php");
     exit();
 }
 elseif ( empty($_POST['password'])){
-    header("Location: ../../admin_login.php?error=Pls enter password");
+    $_SESSION['error'] = 'Pls enter your password';
+    header("Location: /evsu_registrar/admin_login.php");
     exit();
 }
 
@@ -25,12 +27,15 @@ if ($stmt = $conn->prepare('SELECT id, dept_id, password FROM admin WHERE userna
             $_SESSION['ad_name'] = $_POST['username'];
             $_SESSION['dept_id'] = $dept_id;
             $_SESSION['id'] = $id;
-            header("Location: ../admin/dashboard.php?success=Welcome");
+            $_SESSION['success'] = 'Welcome back '. $_POST['username'];
+            header("Location: ../admin/dashboard.php");
         } else {
-            header("Location: ../admin_login.php?error=Incorrect Password");
+            $_SESSION['error'] = 'Invalid password';
+            header("Location: /evsu_registrar/admin_login.php");
         }
     } else {
-        header("Location: ../admin_login.php?error=Username doesn't exist");
+        $_SESSION['error'] = 'Username doesnt exist';
+        header("Location: /evsu_registrar/admin_login.php");
     }
     exit();
 }

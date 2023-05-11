@@ -16,22 +16,34 @@ include '../../toast.php'
         max-height: 55vh;
         overflow-y: auto;
     }
+    .docCardIMG:hover {
+        height: 200px !important; /* set the desired increased height */
+    }
+
+    .docCardIMG {
+        transition: all 0.3s ease;
+        position: relative;
+        height: 150px; /* set the desired height of the container */
+        overflow: hidden;
+    }
+
+    .docCardIMG img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
 </style>
 
 <link rel="stylesheet" href="../../assets/fontawesome-free-6.2.1-web/css/all.min.css" type="text/css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 <div class="container d-flex justify-content-center">
     <div class="p-5 col-sm-12 col-md-12 col-lg-12">
-
-        <a href="../select_sched.php" class="btn btn-danger border-0 text-light mb-3 bg_primary" style="font-size: .8rem;">
-        <i class="fa fa-arrow-alt-circle-left me-2"></i>Back to Portal
-        </a>
-
         <div class="card formCard mx-auto">
-            <div class="card-header">
-                <div class="text-lg-start text-md-center">
-                    <img src="../../img/registrar.png" style="width: 100%; max-width: 500px" alt="evsu logo">
-                </div>
+            <div class="card-header fs-5">
+                <strong>Request Form</strong>
             </div>
             <form method="post" action="submitRequest.php" enctype="multipart/form-data" class="m-0">
                 <div class="row p-4">
@@ -71,7 +83,7 @@ include '../../toast.php'
                             </div>
                             <div class="authorized-section col-sm-12 col-md-5 col-lg-12 d-none">
                                 <div class="w-100 mb-3">
-                                    <img id="idPicturePreview" src="../../img/ID_cardDefault.jpg" alt="ID Picture" class="img-fluid rounded-3">
+                                    <img id="idPicturePreview" src="..//evsu_registrar/img/docx_default.png" alt="ID Picture" class="img-fluid rounded-3">
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="idPicture"></label>
@@ -90,11 +102,15 @@ include '../../toast.php'
                             <?php while ($row = mysqli_fetch_assoc($documents)) : ?>
                                 <div class="col">
                                     <div onclick="toggleCheckbox(<?= $row['DocumentID'] ?>)" style="cursor: pointer" class="card h-100" id="card<?= $row['DocumentID'] ?>">
-                                        <div class="position-relative">
+                                        <div class="position-relative border-bottom">
                                             <?php if (!isset($row['PreviewImage']) || $row['PreviewImage'] === '') : ?>
-                                                <img src="../../img/ID_cardDefault.jpg" class="card-img-top" id="cardImg" alt="<?= $row['DocumentDescription'] ?>">
+                                                <div class="docCardIMG">
+                                                    <img src="/evsu_registrar/img/docx_default.png" class="card-img-top" id="cardImg" alt="<?= $row['DocumentName'] ?>">
+                                                </div>
                                             <?php else : ?>
-                                                <img src="<?= $row['PreviewImage'] ?>" class="card-img-top" id="cardImg" alt="<?= $row['DocumentDescription'] ?>">
+                                                <div class="docCardIMG">
+                                                    <img src="<?= $row['PreviewImage'] ?>" class="card-img-top" id="cardImg" alt="<?= $row['DocumentDescription'] ?>">
+                                                </div>
                                             <?php endif; ?>
                                             <div class="position-absolute p-3 top-0 d-flex justify-content-between w-100">
                                                 <div class="form-check">
@@ -108,6 +124,7 @@ include '../../toast.php'
                                             </div>
                                         </div>
                                         <div class="card-body h-100">
+                                            <div class="fs-6 fw-bold mb-2"><?= $row['DocumentName'] ?></div>
                                             <?php
                                             $description = $row['DocumentDescription'];
                                             $lines = explode("\n", $description); // Split the text into an array of lines
@@ -125,15 +142,18 @@ include '../../toast.php'
                                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="documentModalLabel<?= $row['DocumentID'] ?>"><?= $row['DocumentDescription'] ?></h5>
+                                                <h5 class="modal-title"><?= $row['DocumentName'] ?></h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-body">
+                                            <div class="modal-body p-0">
                                                 <?php if (!isset($row['PreviewImage']) || $row['PreviewImage'] === '') : ?>
-                                                    <img src="../../img/ID_cardDefault.jpg" class="img-fluid" alt="<?= $row['DocumentDescription'] ?>">
+                                                    <img src="/evsu_registrar/img/docx_default.png" class="img-fluid" alt="<?= $row['DocumentDescription'] ?>">
                                                 <?php else : ?>
                                                     <img src="<?= $row['PreviewImage'] ?>" class="img-fluid" alt="<?= $row['DocumentDescription'] ?>">
                                                 <?php endif; ?>
+                                            </div>
+                                            <div class="modal-footer justify-content-start">
+                                                <div><?= $row['DocumentDescription'] ?></div>
                                             </div>
                                         </div>
                                     </div>
@@ -142,7 +162,10 @@ include '../../toast.php'
                         </div>
                     </div>
                 </div>
-                <div class="card-footer d-flex justify-content-end py-3">
+                <div class="card-footer d-flex justify-content-between py-3">
+                    <a href="../select_sched.php" class="btn btn-light">
+                        <i class="fa-solid fa-chevron-left"></i> Back to Portal
+                    </a>
                     <button type="submit" name="submit" class="btn btn-primary w-25">Submit</button>
                 </div>
             </form>
@@ -192,7 +215,7 @@ include '../../toast.php'
                     };
                     reader.readAsDataURL(input.files[0]);
                 } else {
-                    $('#idPicturePreview').attr('src', '../../img/ID_cardDefault.jpg');
+                    $('#idPicturePreview').attr('src', '..//evsu_registrar/img/docx_default.png');
                 }
             });
 

@@ -45,7 +45,7 @@
                                         <div class="col mb-3">
                                             <div class="bg-white doc_card border rounded shadow-sm" style="max-width: 180px">
                                                 <div class="docCardIMG">
-                                                    <img src="../img/ID_cardDefault.jpg" class="card-img-top" alt="<?= $doc['DocumentName'] ?>">
+                                                    <img src="/evsu_registrar/img/docx_default.png" class="card-img-top" alt="<?= $doc['DocumentName'] ?>">
                                                 </div>
                                                 <div class="px-2 pt-2">
                                                     <div style="font-size: 12px; font-weight: bold" class="mb-1"><?= $doc['DocumentName'] ?></div>
