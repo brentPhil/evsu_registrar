@@ -102,11 +102,6 @@ INNER JOIN courses ON st_profile.course_id = courses.id WHERE st_profile.id = '$
         global $view;
         return mysqli_query($view->conn, "SELECT * FROM courses WHERE dept_id = '$id'");
     }
-    public function admins(): mysqli_result|bool
-    {
-        global $view;
-        return mysqli_query($view->conn, "SELECT * FROM admin_request.php a INNER JOIN deppartment b ON a.dept_id = b.id");
-    }
 
 //    Insert Functions
 }

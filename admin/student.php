@@ -117,7 +117,7 @@ include '../toast.php'
                             </div>
                         <?php } ?>
                         <div class="form-floating mb-3">
-                            <select class="form-select" id="floatingSelect" name="dept" aria-label="Floating label select example">
+                            <select class="form-select" id="floatingSelect" name="dept" aria-label="Floating label select example" required>
                                 <option value="" selected>Select Department</option>
                                 <?php foreach($depts as $dept) if($dept['id'] != 12){?>
                                     <option value="<?php echo $dept['id'] ?>"><?php echo $dept['dept'] ?></option>
@@ -130,11 +130,11 @@ include '../toast.php'
                             <label for="floatingInput"><i class="fa-solid fa-user me-3"></i>Student ID no.</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" name="user_name" placeholder="username">
+                            <input type="text" class="form-control" id="floatingInput" name="user_name" placeholder="username" required>
                             <label for="floatingInput"><i class="fa-solid fa-user me-3"></i>Username</label>
                         </div>
                         <div class="form-floating">
-                            <input type="password" class="form-control" id="floatingInput" name="password" placeholder="password">
+                            <input type="password" class="form-control" id="floatingInput" name="password" placeholder="password" required>
                             <label for="floatingInput"><i class="fa-solid fa-lock me-3"></i>Password</label>
                         </div>
                     </div>

@@ -27,7 +27,6 @@ while ($row = mysqli_fetch_assoc($result)) {
     }
     $all_count += $row['count'];
 }
-
 ?>
     <style>
         .body{

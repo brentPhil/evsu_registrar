@@ -1,10 +1,17 @@
 <?php
 include 'db_conn/view.php';
 $view = new view();
-$courses=$view->course_view();
-session_start()
+session_start();
+$courses = [];
+if (!isset($_SESSION['dept_id'])){
+    unset($_SESSION["loggedin"], $_SESSION["id"], $_SESSION["Profile_ID"], $_SESSION["dept_id"], $_SESSION["name"]);
+    header("Location: /evsu_registrar/student_login.php");
+    exit;
+}
+isset($_SESSION['dept_id']) && $courses=$view->course_view_id($_SESSION['dept_id']);
+include 'main_libraries.php';
+include 'toast.php'
 ?>
-<?php include 'main_libraries.php'?>
 <div class="container h-100">
     <div class="row p-3 h-100 d-flex align-items-center justify-content-center">
         <div class="card border-0 p-0 shadow-lg col-sm-12 col-s-6 col-md-8 col-lg-6">
@@ -25,7 +32,7 @@ session_start()
                     <?php } ?>
                     <div class="form-floating mb-3">
                         <select class="form-select" name="course" id="floatingSelectGrid">
-                            <?php foreach($courses as $course){ if ($course['dept_id'] != 0 && $course['dept_id'] == $_SESSION['dept_id']){?>
+                            <?php foreach($courses as $course){ if ($course['dept_id'] != 0){?>
                                 <option value="<?php echo $course['id'] ?>"><?php echo $course['name'] ?></option>
                             <?php }} ?>
                         </select>

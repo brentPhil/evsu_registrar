@@ -29,13 +29,6 @@ include 'main_libraries.php';
                     <h6 class="mb-0">OFFICE OF THE REGISTRAR EVSU-TC</h6>
                 </div>
                 <div class="card-body">
-                    <?php if (isset($_GET['error'])) { ?>
-                        <div class="alert alert-danger" role="alert">
-                            <i class="fa-solid fa-warning me-3"></i>
-                            <span><?php echo $_GET['error']; ?></span>
-                        </div>
-                    <?php } ?>
-
                     <?php
                     $validation_pass = '';
                     $validation = '';
@@ -47,6 +40,8 @@ include 'main_libraries.php';
                         $validation_feedback = $_SESSION['error'];
                         $validation = 'is-invalid';
                     }
+                    unset($_SESSION['error_pass']);
+                    unset($_SESSION['error']);
                     ?>
                     <form action="/evsu_registrar/db_conn/admin_login.php" method="POST">
                         <div class="input-group has-validation mb-3">
@@ -62,7 +57,7 @@ include 'main_libraries.php';
                         <div class="input-group has-validation mb-3">
                             <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
                             <div class="form-floating <?= $validation_pass ?>">
-                                <input type="text" name="password" class="form-control <?= $validation_pass ?>" id="floatingInputGroup1" placeholder="Username">
+                                <input type="password" name="password" class="form-control <?= $validation_pass ?>" id="floatingInputGroup1" placeholder="Username">
                                 <label for="floatingInputGroup1">Password</label>
                             </div>
                             <div class="invalid-feedback">

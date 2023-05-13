@@ -26,26 +26,41 @@ if (isset($_SESSION["loggedin"]) && $_SESSION['loggedin']) {
                         <h6>OFFICE OF THE REGISTRAR EVSU-TC</h6>
                     </div>
                 </div>
+                <?php
+                $validation_pass = '';
+                $validation = '';
+                $validation_feedback = '';
+                if(isset($_SESSION['error_pass'])){
+                    $validation_feedback = $_SESSION['error_pass'];
+                    $validation_pass = 'is-invalid';
+                }elseif(isset($_SESSION['error'])){
+                    $validation_feedback = $_SESSION['error'];
+                    $validation = 'is-invalid';
+                }
+                unset($_SESSION['error_pass']);
+                unset($_SESSION['error']);
+                ?>
                 <div class="form px-5 pt-4">
                     <form action="student/PhpHandler/st_login.php" method="POST">
-                        <?php if (isset($_GET['error'])) { ?>
-                            <div class="alert alert-danger" role="alert">
-                                <span class="text-danger"><i class="fa-solid fa-warning me-3"></i><?php echo $_GET['error']; ?></span>
-                            </div>
-                        <?php } ?>
-                        <div class="input-group mb-3">
+                        <div class="input-group has-validation mb-3">
                             <span class="input-group-text"><i class="fa-solid fa-address-card"></i></span>
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="floatingInputGroup1" name="st_id" placeholder="student ID no" oninput="formatStudentId(this)" pattern="[0-9]{4}-[0-9]{5}" maxlength="10">
+                            <div class="form-floating <?= $validation ?>">
+                                <input type="text" class="form-control <?= $validation ?>" id="floatingInputGroup1" name="st_id" placeholder="student ID no" oninput="formatStudentId(this)" pattern="[0-9]{4}-[0-9]{5}" maxlength="10">
                                 <label for="floatingInputGroup1">Student ID no</label>
+                            </div>
+                            <div class="invalid-feedback">
+                                <?= $validation_feedback ?>
                             </div>
                         </div>
 
-                        <div class="input-group mb-3">
+                        <div class="input-group has-validation mb-3">
                             <span class="input-group-text"><i class="fa-solid fa-lock" style="margin: 0 2px"></i></span>
-                            <div class="form-floating">
-                                <input type="text" class="form-control" name="password" id="floatingInputGroup1" placeholder="Password">
+                            <div class="form-floating <?= $validation_pass ?>">
+                                <input type="password" class="form-control <?= $validation_pass ?>" name="password" id="floatingInputGroup1" placeholder="Password">
                                 <label for="floatingInputGroup1">Password</label>
+                            </div>
+                            <div class="invalid-feedback">
+                                <?= $validation_feedback ?>
                             </div>
                         </div>
 

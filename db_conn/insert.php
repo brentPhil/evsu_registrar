@@ -48,9 +48,9 @@ class insert extends dbconfig
         }
         return true;
     }
-    public function save_profile($st_id, $course_id, $lname, $fname, $middle, $gender, $address, $email, $phone): bool
+    public function save_profile($st_id, $course_id, $lname, $fname, $middle, $gender, $address, $email, $phone): ?int
     {
-        $stmt = $this->conn->prepare("INSERT INTO st_profile( course_id, lname, fname, middle, gender, address, email, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $this->conn->prepare("INSERT INTO st_profile(course_id, lname, fname, middle, gender, address, email, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("isssssss", $course_id, $lname, $fname, $middle, $gender, $address, $email, $phone);
 
         // Insert profile record
@@ -63,10 +63,14 @@ class insert extends dbconfig
             // Insert student record
             $stmt = $this->conn->prepare("UPDATE student SET Profile_ID = ? WHERE st_id = ?");
             $stmt->bind_param("ii", $profile_id, $st_id);
-            return $stmt->execute();
+            $result = $stmt->execute();
+
+            if ($result) {
+                return $profile_id;
+            }
         }
 
-        return $result;
+        return null;
     }
 
     public function new_dept($dept, $desc): mysqli_result|bool

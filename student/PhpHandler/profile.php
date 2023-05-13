@@ -24,7 +24,8 @@ if (isset($_POST['save_pro'])) {
         $_POST['phone']
     );
 
-    if ($result) {
+    if ($result !== null) {
+        $_SESSION['Profile_ID'] = $result;
         header("Location: ../st_main.php?success=Welcome");
     } else {
         header("Location: ../../st_profile.php?error");

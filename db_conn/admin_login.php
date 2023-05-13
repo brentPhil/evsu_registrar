@@ -27,7 +27,7 @@ if ($stmt = $conn->prepare('SELECT id, dept_id, password FROM admin WHERE userna
             $_SESSION['ad_name'] = $_POST['username'];
             $_SESSION['dept_id'] = $dept_id;
             $_SESSION['id'] = $id;
-            $_SESSION['success'] = 'Welcome back '. $_POST['username'];
+            $_SESSION['success'] = 'Welcome back <span class="text-capitalize fw-bold">'.$_POST['username'].'!</span>';
             header("Location: ../admin/dashboard.php");
             unset( $_SESSION['error_pass']);
             unset( $_SESSION['error']);
