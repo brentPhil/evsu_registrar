@@ -7,7 +7,12 @@ if (isset($_SESSION["loggedin"]) && $_SESSION['loggedin']) {
     unset($_SESSION["loggedin"], $_SESSION["id"], $_SESSION["Profile_ID"], $_SESSION["dept_id"], $_SESSION["name"]);
 }
 ?>
-<?php include '_libraries.php'?>
+<?php include 'main_libraries.php'?>
+<style>
+    .container{
+        font-family: 'Poppins', sans-serif;
+    }
+</style>
 <div class="container">
     <div class="row vh-100 d-flex align-items-center justify-content-center">
         <div class="col-12 col-md-8 col-lg-5">
@@ -28,13 +33,20 @@ if (isset($_SESSION["loggedin"]) && $_SESSION['loggedin']) {
                                 <span class="text-danger"><i class="fa-solid fa-warning me-3"></i><?php echo $_GET['error']; ?></span>
                             </div>
                         <?php } ?>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" name="st_id" placeholder="student ID no." oninput="formatStudentId(this)" pattern="[0-9]{4}-[0-9]{5}" maxlength="10">
-                            <label for="floatingInput"><i class="fa-solid fa-user me-3"></i>Student ID no.</label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="fa-solid fa-address-card"></i></span>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="floatingInputGroup1" name="st_id" placeholder="student ID no" oninput="formatStudentId(this)" pattern="[0-9]{4}-[0-9]{5}" maxlength="10">
+                                <label for="floatingInputGroup1">Student ID no</label>
+                            </div>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingInput" name="password" placeholder="password">
-                            <label for="floatingInput"><i class="fa-solid fa-lock me-3"></i>Password</label>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="fa-solid fa-lock" style="margin: 0 2px"></i></span>
+                            <div class="form-floating">
+                                <input type="text" class="form-control" name="password" id="floatingInputGroup1" placeholder="Password">
+                                <label for="floatingInputGroup1">Password</label>
+                            </div>
                         </div>
 
                         <div class="alert alert-primary text-center" role="alert">

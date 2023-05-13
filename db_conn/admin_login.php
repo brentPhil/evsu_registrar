@@ -8,7 +8,7 @@ if ( empty($_POST['username'])) {
     exit();
 }
 elseif ( empty($_POST['password'])){
-    $_SESSION['error'] = 'Pls enter your password';
+    $_SESSION['error_pass'] = 'Pls enter your password';
     header("Location: /evsu_registrar/admin_login.php");
     exit();
 }
@@ -29,8 +29,10 @@ if ($stmt = $conn->prepare('SELECT id, dept_id, password FROM admin WHERE userna
             $_SESSION['id'] = $id;
             $_SESSION['success'] = 'Welcome back '. $_POST['username'];
             header("Location: ../admin/dashboard.php");
+            unset( $_SESSION['error_pass']);
+            unset( $_SESSION['error']);
         } else {
-            $_SESSION['error'] = 'Invalid password';
+            $_SESSION['error_pass'] = 'Invalid password';
             header("Location: /evsu_registrar/admin_login.php");
         }
     } else {

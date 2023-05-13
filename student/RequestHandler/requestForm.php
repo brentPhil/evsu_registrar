@@ -185,17 +185,16 @@ include '../../toast.php'
     $(document).ready(function() {
         $(function() {
             $('.education-btn').click(function() {
-                var educationType = $(this).data('education-type');
+                const educationType = $(this).data('education-type');
                 if (educationType === 'undergraduate') {
-                    $('.graduate-section').removeClass('d-none').find('select').prop('disabled', false);
                     $('#studentType').val('undergraduate');
                 } else {
-                    $('.graduate-section').addClass('d-none').find('select').prop('disabled', true);
                     $('#studentType').val('graduate');
                 }
                 $('.education-btn').removeClass('active');
                 $(this).addClass('active');
             });
+
             $('.submission-btn').click(function() {
                 const submissionType = $(this).data('submission-type');
                 $('#submissionType').val(submissionType);

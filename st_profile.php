@@ -4,7 +4,7 @@ $view = new view();
 $courses=$view->course_view();
 session_start()
 ?>
-<?php include '_libraries.php'?>
+<?php include 'main_libraries.php'?>
 <div class="container h-100">
     <div class="row p-3 h-100 d-flex align-items-center justify-content-center">
         <div class="card border-0 p-0 shadow-lg col-sm-12 col-s-6 col-md-8 col-lg-6">

@@ -11,8 +11,13 @@ if (isset($_SESSION["admin_login"]) && $_SESSION['admin_login']) {
         $_SESSION["dept_id"]);
 }
 include 'main_libraries.php';
-include 'toast.php'
 ?>
+
+<style>
+    .container{
+        font-family: 'Poppins', sans-serif;
+    }
+</style>
 
 <div class="container">
     <div class="row vh-100 align-items-center justify-content-center">
@@ -30,14 +35,39 @@ include 'toast.php'
                             <span><?php echo $_GET['error']; ?></span>
                         </div>
                     <?php } ?>
+
+                    <?php
+                    $validation_pass = '';
+                    $validation = '';
+                    $validation_feedback = '';
+                    if(isset($_SESSION['error_pass'])){
+                        $validation_feedback = $_SESSION['error_pass'];
+                        $validation_pass = 'is-invalid';
+                    }elseif(isset($_SESSION['error'])){
+                        $validation_feedback = $_SESSION['error'];
+                        $validation = 'is-invalid';
+                    }
+                    ?>
                     <form action="/evsu_registrar/db_conn/admin_login.php" method="POST">
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" name="username" placeholder="Username">
-                            <label for="floatingInput"><i class="fa-solid fa-user me-3"></i>Username</label>
+                        <div class="input-group has-validation mb-3">
+                            <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                            <div class="form-floating <?= $validation ?>">
+                                <input type="text" name="username" class="form-control <?= $validation ?>" id="floatingInputGroup1" placeholder="Username">
+                                <label for="floatingInputGroup1">Username</label>
+                            </div>
+                            <div class="invalid-feedback">
+                                <?= $validation_feedback ?>
+                            </div>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingInput" name="password" placeholder="password">
-                            <label for="floatingInput"><i class="fa-solid fa-lock me-3"></i>Password</label>
+                        <div class="input-group has-validation mb-3">
+                            <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+                            <div class="form-floating <?= $validation_pass ?>">
+                                <input type="text" name="password" class="form-control <?= $validation_pass ?>" id="floatingInputGroup1" placeholder="Username">
+                                <label for="floatingInputGroup1">Password</label>
+                            </div>
+                            <div class="invalid-feedback">
+                                <?= $validation_feedback ?>
+                            </div>
                         </div>
                         <button class="btn btn-danger bg_primary w-100 py-3" name="login" type="submit">Login</button>
                     </form>

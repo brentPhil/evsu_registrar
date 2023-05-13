@@ -14,14 +14,16 @@ if(isset($_POST['submit']) && !empty($_POST['requestedDocuments'])) {
     $selectedDocuments = $_POST['requestedDocuments'];
     $requestType = $_POST['submissionType'];
     $studentId = $_SESSION['id'];
-    $studentFullName = $student_info['lname'] . ', ' . $student_info['fname'] . ' ' . $student_info['middle'] . '.';
-    $studentEmail = $student_info['email'];
-    $studentAddress = $student_info['address'];
-    $studentGender = $student_info['gender'];
-    $studentPhone = $student_info['phone'];
+    if (!empty($profile_info)){
+        $studentFullName = $student_info['lname'] . ', ' . $student_info['fname'] . ' ' . $student_info['middle'] . '.';
+        $studentEmail = $student_info['email'];
+        $studentAddress = $student_info['address'];
+        $studentGender = $student_info['gender'];
+        $studentPhone = $student_info['phone'];
+        $course = $student_info['name'];
+    }
     $department = $_POST['department'];
     $education = $_POST['studentType'];
-    $course = $student_info['name'];
     $schedule = $_SESSION['date'];
     $authorizedPersonnelId = null;
     $requestStatus = null;

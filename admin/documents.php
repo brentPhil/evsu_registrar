@@ -88,14 +88,11 @@ include '../main_libraries.php';?>
                                         <tr>
                                             <td><?php echo $options['DocumentName'] ?></td>
                                             <td><?php echo $options['DocumentDescription'] ?></td>
-                                            <td class="d-flex">
-                                                <button type="button" class="btn btn-outline-warning me-2 disabled" style="font-size: .8rem">
-                                                    <i class="fa fa-edit" aria-hidden="true"></i> Update
-                                                </button>
+                                            <td class="d-flex justify-content-end">
                                                 <form method="POST" action="" class="m-0" onsubmit="return confirm('Are you sure you want to delete this document?')">
                                                     <input type="hidden" name="doc_id" value="<?php echo $options['DocumentID'] ?>">
                                                     <button type="submit" name="delete_document" class="btn btn-outline-danger" style="font-size: .8rem">
-                                                        <i class="fa fa-trash" aria-hidden="true"></i> Delete
+                                                        <i class="fa fa-trash" aria-hidden="true"></i>
                                                     </button>
                                                 </form>
                                             </td>
