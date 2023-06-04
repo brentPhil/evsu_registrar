@@ -1,5 +1,5 @@
 <div class="table-responsive" style="min-height: 70vh">
-    <table id="myTable" class="table border-secondary-subtle h-100" style="width:100%">
+    <table id="claimedTB" class="table border-secondary-subtle h-100" style="width:100%">
         <thead class="bg-light text-secondary">
         <tr>
             <th>#</th>
@@ -7,6 +7,8 @@
             <th>Schedule</th>
             <th>Status</th>
             <th>Requested documents</th>
+            <th hidden="hidden"></th>
+            <th hidden="hidden"></th>
             <th>Action</th>
         </tr>
         </thead>
@@ -55,6 +57,12 @@
                         </div>
                     </div>
                 </td>
+                <td hidden="hidden">
+                    <?php foreach($documents as $doc){ echo $doc['DocumentName']; }?>
+                </td>
+                <td hidden="hidden">
+                    <?php echo $request['Department'] ?>
+                </td>
                 <td class="text-end align-middle" style="width: 20px">
                     <div class="d-flex justify-content-end">
                         <button type="button" class="btn btn-light btn-sm me-1" style="font-size: .8rem" data-bs-toggle="modal" data-bs-target="#modal<?= $request['RequestID'] ?>">
@@ -69,3 +77,45 @@
         </tbody>
     </table>
 </div>
+<script>
+    $(document).ready(function() {
+        const claimed = $('#claimedTB').DataTable({
+            responsive: true,
+            columnDefs: [
+                { responsivePriority: 2, targets: 0 },
+                { responsivePriority: 3, targets: -3 },
+                { responsivePriority: 1, targets: -1 }
+            ],
+            dom: 'topi',
+            paging: false,
+            info: false
+        });
+
+        $('#inlineFormInputGroupUsername').on('keyup', function() {
+            claimed.search(this.value).draw();
+        });
+
+        function applyFilter(columnIndex, selectedValue) {
+            claimed.search('').column(columnIndex).search(selectedValue, true, false).draw();
+        }
+
+        $('#date-filter, #filter-docx, #filter-dept').on('change', function() {
+            if (this.id === 'date-filter') {
+                const selectedDateTime = $(this).val();
+                let formattedDate = moment(selectedDateTime).format('MMM D, YYYY');
+                let formattedTime = '';
+
+                if (selectedDateTime.includes(':')) {
+                    formattedTime = moment(selectedDateTime).format('h:mm a');
+                    formattedDate += ` | ${formattedTime}`;
+                }
+
+                applyFilter(2, formattedDate);
+            } else if (this.id === 'filter-docx') {
+                applyFilter(5, $(this).val());
+            } else if (this.id === 'filter-dept') {
+                applyFilter(6, $(this).val());
+            }
+        });
+    });
+</script>

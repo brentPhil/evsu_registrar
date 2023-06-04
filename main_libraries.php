@@ -18,3 +18,6 @@
 <!-- DataTables -->
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+
+<!--moment js-->
+<script src="/evsu_registrar/node_modules/moment/min/moment.min.js"></script>

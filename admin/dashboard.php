@@ -1,6 +1,8 @@
 <?php
 include '../db_conn/view.php';
 $view = new view();
+$dept = $view->dept_view();
+$docx = $view->view_all_documents();
 $requests = $view->view_all_requests();
 $events_v = $view->event_view();
 $result = $view->request_count();
@@ -124,13 +126,13 @@ include '../toast.php';
                                             <div class="nav-link text-secondary active" data-target="#all">All <span class="badge bg-secondary-subtle rounded-1 align-top text-dark"><?= $all_count ?></span></div>
                                         </div>
                                         <div class="nav-item p-0">
-                                            <div class="nav-link text-secondary" data-target="#pending">New Request <span class="badge bg-secondary-subtle rounded-1 align-top text-dark"><?= $pending_count ?></span></div>
+                                            <div class="nav-link text-secondary" data-target="#pending"><i class="fa-solid fa-file-circle-plus" style="color: #FFA500"></i> Pending Request <span class="badge bg-secondary-subtle rounded-1 align-top text-dark"><?= $pending_count ?></span></div>
                                         </div>
                                         <div class="nav-item p-0">
-                                            <div class="nav-link text-secondary" data-target="#processing">Processing <span class="badge bg-secondary-subtle rounded-1 align-top text-dark"><?= $processing_count ?></span></div>
+                                            <div class="nav-link text-secondary" data-target="#processing"><i class="fa-solid fa-arrow-rotate-right" style="color: #42de92"></i> In Progress <span class="badge bg-secondary-subtle rounded-1 align-top text-dark"><?= $processing_count ?></span></div>
                                         </div>
                                         <div class="nav-item p-0">
-                                            <div class="nav-link text-secondary" data-target="#for-release">For release <span class="badge bg-secondary-subtle rounded-1 align-top text-dark"><?= $for_release_count ?></span></div>
+                                            <div class="nav-link text-secondary" data-target="#for-release"><i class="fa-solid fa-hourglass-half " style="color: #4cc0f6"></i> For release <span class="badge bg-secondary-subtle rounded-1 align-top text-dark"><?= $for_release_count ?></span></div>
                                         </div>
                                     </div>
                                     <form class="m-0 d-grid align-items-center" method="post" action="PhpHandler/select_sched.php">
@@ -142,7 +144,20 @@ include '../toast.php';
                             <div class="card-body p-0">
 
                                 <div class="d-flex justify-content-between p-3 border-bottom border-secondary">
-                                    <div></div>
+                                    <div class="d-flex gap-3">
+                                        <select id="filter-dept" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                            <option selected value="">All Department</option>
+                                            <?php foreach ($dept as $department ){
+                                                echo "<option>".$department['dept']."</option>";
+                                            } ?>
+                                        </select>
+                                        <select id="filter-docx" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                            <option selected value="">All Documents</option>
+                                            <?php foreach ($docx as $doc ){
+                                                echo "<option>".$doc['DocumentName']."</option>";
+                                            } ?>
+                                        </select>
+                                    </div>
                                     <div>
                                         <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
                                         <div class="input-group">

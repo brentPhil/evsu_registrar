@@ -7,6 +7,8 @@
             <th>Schedule</th>
             <th>Status</th>
             <th>Requested documents</th>
+            <th hidden="hidden"></th>
+            <th hidden="hidden"></th>
             <th>Action</th>
         </tr>
         </thead>
@@ -23,7 +25,7 @@
             ?>
             <tr>
                 <td class="align-middle"><?php echo $counter; ?></td>
-                <td class="text-truncate align-middle" style="font-weight: bolder; max-width: 150px;"><?= $request['StudentFullName'] ?></td>
+                <td class="text-truncate align-middle text-capitalize" style="font-weight: bolder; max-width: 150px;"><?= $request['StudentFullName'] ?></td>
                 <td class="text-truncate align-middle" style="max-width: 100px;"><?= (new DateTime($request['Schedule']))->format('F d, Y | h:i a') ?></td>
                 <td class="align-middle">
                     <div style="padding: .5em 0 .5em 0; min-width: 110px"
@@ -59,6 +61,12 @@
                         </div>
                     </div>
                 </td>
+                <td hidden="hidden">
+                    <?php foreach($documents as $doc){ echo $doc['DocumentName']; }?>
+                </td>
+                <td hidden="hidden">
+                    <?php echo $request['Department'] ?>
+                </td>
                 <td class="text-end align-middle" style="width: 20px">
                     <div class="d-flex justify-content-end">
                         <button type="button" class="btn btn-light btn-sm me-1" style="font-size: .8rem" data-bs-toggle="modal" data-bs-target="#modal<?= $request['RequestID'] ?>">
@@ -90,6 +98,29 @@
 
         $('#inlineFormInputGroupUsername').on('keyup', function() {
             inprog.search(this.value).draw();
+        });
+
+        function applyFilter(columnIndex, selectedValue) {
+            inprog.search('').column(columnIndex).search(selectedValue, true, false).draw();
+        }
+
+        $('#date-filter, #filter-docx, #filter-dept').on('change', function() {
+            if (this.id === 'date-filter') {
+                const selectedDateTime = $(this).val();
+                let formattedDate = moment(selectedDateTime).format('MMM D, YYYY');
+                let formattedTime = '';
+
+                if (selectedDateTime.includes(':')) {
+                    formattedTime = moment(selectedDateTime).format('h:mm a');
+                    formattedDate += ` | ${formattedTime}`;
+                }
+
+                applyFilter(2, formattedDate);
+            } else if (this.id === 'filter-docx') {
+                applyFilter(5, $(this).val());
+            } else if (this.id === 'filter-dept') {
+                applyFilter(6, $(this).val());
+            }
         });
     });
 </script>

@@ -7,6 +7,8 @@
             <th>Schedule</th>
             <th>Status</th>
             <th>Requested documents</th>
+            <th hidden="hidden"></th>
+            <th hidden="hidden"></th>
             <th>Action</th>
         </tr>
         </thead>
@@ -23,7 +25,7 @@
             ?>
             <tr>
                 <td class="align-middle"><?php echo $counter; ?></td>
-                <td class="text-truncate align-middle" style="font-weight: bolder; max-width: 150px;"><?= $request['StudentFullName'] ?></td>
+                <td class="text-truncate align-middle text-capitalize" style="font-weight: bolder; max-width: 150px;"><?= $request['StudentFullName'] ?></td>
                 <td class="text-truncate align-middle" style="max-width: 100px;"><?= (new DateTime($request['Schedule']))->format('F d, Y | h:i a') ?></td>
                 <td class="align-middle">
                     <div style="padding: .5em 0 .5em 0; min-width: 110px"
@@ -58,6 +60,12 @@
                             </div>
                         </div>
                     </div>
+                </td>
+                <td hidden="hidden">
+                    <?php foreach($documents as $doc){ echo $doc['DocumentName']; }?>
+                </td>
+                <td hidden="hidden">
+                    <?php echo $request['Department'] ?>
                 </td>
                 <td class="text-end align-middle" style="width: 20px">
                     <div class="d-flex justify-content-end">

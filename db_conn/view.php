@@ -11,7 +11,7 @@ class view extends dbconfig
     public function dept_view(): mysqli_result|bool
     {
         global $view;
-        return mysqli_query($view->conn, "SELECT * FROM deppartment");
+        return mysqli_query($view->conn, "SELECT * FROM deppartment WHERE id !=12");
     }
 
     public function request_count(): mysqli_result|bool

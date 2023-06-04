@@ -1,6 +1,10 @@
 <?php
+include '../db_conn/view.php';
 include '../db_conn/archive.php';
+$view = new view();
 $archive = new archive();
+$docx = $view->view_all_documents();
+$dept = $view->dept_view();
 $requests = $archive->request_archive();
 $result = $archive->archive_count();
 
@@ -46,7 +50,7 @@ include '../main_libraries.php';
         th, td {
             padding: 1em !important;
         }
-
+        
         .events{
             font-size: .8em;
             text-transform: capitalize;
@@ -104,10 +108,10 @@ include '../main_libraries.php';
                                     <div class="nav-link text-secondary active" data-target="#all">All <span class="badge bg-secondary-subtle rounded-1 align-top text-dark"><?= $all_count ?></span></div>
                                 </div>
                                 <div class="nav-item p-0">
-                                    <div class="nav-link text-secondary" data-target="#claimed">Claimed <span class="badge bg-secondary-subtle rounded-1 align-top text-dark"><?= $claimed ?></span></div>
+                                    <div class="nav-link text-secondary" data-target="#claimed"><i class="fa-solid fa-square-check text-success"></i> Claimed <span class="badge bg-secondary-subtle rounded-1 align-top text-dark"><?= $claimed ?></span></div>
                                 </div>
                                 <div class="nav-item p-0">
-                                    <div class="nav-link text-secondary" data-target="#canceled">Canceled <span class="badge bg-secondary-subtle rounded-1 align-top text-dark"><?= $canceled ?></span></div>
+                                    <div class="nav-link text-secondary" data-target="#canceled"><i class="fa-solid fa-square-xmark text-danger"></i> Canceled <span class="badge bg-secondary-subtle rounded-1 align-top text-dark"><?= $canceled ?></span></div>
                                 </div>
                             </div>
                         </div>
@@ -115,7 +119,23 @@ include '../main_libraries.php';
                         <div class="card-body p-0">
 
                             <div class="d-flex justify-content-between p-3 border-bottom border-secondary">
-                                <div></div>
+                                <div class="d-flex gap-3">
+                                    <select id="filter-dept" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                        <option selected value="">All Department</option>
+                                        <?php foreach ($dept as $department ){
+                                            echo "<option>".$department['dept']."</option>";
+                                        } ?>
+                                    </select>
+                                    <select id="filter-docx" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                        <option selected value="">All Documents</option>
+                                        <?php foreach ($docx as $doc ){
+                                            echo "<option>".$doc['DocumentName']."</option>";
+                                        } ?>
+                                    </select>
+
+                                    <input id="date-filter" class="form-control form-control-sm" type="date" placeholder=".form-control-sm" aria-label=".form-control-sm example">
+                                </div>
+
                                 <div>
                                     <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
                                     <div class="input-group">

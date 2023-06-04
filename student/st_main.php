@@ -105,13 +105,13 @@ while ($row = mysqli_fetch_assoc($result)) {
                                     <div class="nav-link text-secondary active" data-target="#all">All <span class="badge bg-secondary-subtle rounded-1 align-top text-dark"><?= $all_count ?></span></div>
                                 </div>
                                 <div class="nav-item p-0">
-                                    <div class="nav-link text-secondary" data-target="#pending">Pending Request <span class="badge bg-secondary-subtle rounded-1 align-top text-dark"><?= $pending_count ?></span></div>
+                                    <div class="nav-link text-secondary" data-target="#pending"><i class="fa-solid fa-file-circle-plus" style="color: #FFA500"></i> Pending Request <span class="badge bg-secondary-subtle rounded-1 align-top text-dark"><?= $pending_count ?></span></div>
                                 </div>
                                 <div class="nav-item p-0">
-                                    <div class="nav-link text-secondary" data-target="#processing">Processing <span class="badge bg-secondary-subtle rounded-1 align-top text-dark"><?= $processing_count ?></span></div>
+                                    <div class="nav-link text-secondary" data-target="#processing"><i class="fa-solid fa-arrow-rotate-right" style="color: #42de92"></i> In Progress <span class="badge bg-secondary-subtle rounded-1 align-top text-dark"><?= $processing_count ?></span></div>
                                 </div>
                                 <div class="nav-item p-0">
-                                    <div class="nav-link text-secondary" data-target="#for-release">For release <span class="badge bg-secondary-subtle rounded-1 align-top text-dark"><?= $for_release_count ?></span></div>
+                                    <div class="nav-link text-secondary" data-target="#for-release"><i class="fa-solid fa-hourglass-half " style="color: #4cc0f6"></i> For release <span class="badge bg-secondary-subtle rounded-1 align-top text-dark"><?= $for_release_count ?></span></div>
                                 </div>
                             </div>
                         </div>

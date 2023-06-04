@@ -7,7 +7,7 @@
     }
 
     .sideLink .active{
-        color: #1a1a1a !important;
+        color: #ff3636 !important;
         border-right: 3px solid #ff3636;
         background: rgb(2,0,36);
         background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(255,255,255,0) 0%, rgba(255,226,226,0.7987570028011204) 100%);
@@ -55,7 +55,7 @@
         <li>
             <a href="dashboard.php" class="d-flex p-3 links text-decoration-none">
                 <div class="iContainer">
-                    <i class="fa-solid fa-chart-line"></i>
+                    <i class="fa-solid fa-chart-line text-secondary"></i>
                 </div>
                 <span class="tlink overflow-hidden">Dashboard</span>
             </a>
@@ -66,7 +66,7 @@
                 <div class="btn-group dropend w-100">
                     <div class="w-100 p-3 d-flex data-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="iContainer">
-                            <i class="fa-regular fa-square-plus"></i>
+                            <i class="fa-regular fa-square-plus text-secondary"></i>
                         </div>
                         <span class="tlink overflow-hidden w-100">Add</span>
                     </div>
@@ -81,7 +81,7 @@
         <li>
             <a href="event_manager.php" class="d-flex p-3 links text-decoration-none">
                 <div class="iContainer">
-                    <i class="fa-regular fa-calendar-check"></i>
+                    <i class="fa-regular fa-calendar-check text-secondary"></i>
                 </div>
                 <span class="tlink overflow-hidden">Calendar</span>
             </a>
@@ -90,7 +90,7 @@
         <li>
             <a href="app_archive.php" class="d-flex p-3 links text-decoration-none">
                 <div class="iContainer">
-                    <i class="fa-solid fa-archive"></i>
+                    <i class="fa-solid fa-archive text-secondary"></i>
                 </div>
                 <span class="tlink overflow-hidden">Reports</span>
             </a>
